@@ -1,0 +1,8 @@
+#!/bin/sh
+# see http://bit.ly/1cwBQpP
+LOG=/var/log/trim.log
+echo "*** $(date -R) ***" >> $LOG
+<% @ssds.each do |dev| -%>
+fstrim -v <%= dev %> >> $LOG
+<% end -%>
+
