@@ -22,7 +22,7 @@ class baseline::security($syslog_server='') {
 
     file_line { 'syslog-dest-server':
       path => '/etc/rsyslog.conf',
-      line => "*.* @ ${syslog_server}"
+      line => "*.* @${syslog_server}"
     }
   }
 
