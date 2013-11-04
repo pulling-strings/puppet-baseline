@@ -8,7 +8,7 @@ class baseline::filesystem($ssds=[]){
   if(!empty($ssds)){
     file { '/etc/cron.daily/trim':
       ensure  => file,
-      mode    => '0644',
+      mode    => '0700',
       content => template('baseline/trim.erb'),
       owner   => root,
       group   => root,
