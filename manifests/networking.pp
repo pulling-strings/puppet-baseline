@@ -13,12 +13,4 @@ class baseline::networking {
     source  => 'puppet:///modules/baseline/ssh_config',
     require => File["${::home}/.ssh"]
   }
-
-
-  apt::ppa { 'ppa:keithw/mosh':
-  } ->
-
-  package{'mosh':
-    ensure  => present
-  }
 }
