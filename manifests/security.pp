@@ -8,6 +8,12 @@ class baseline::security($syslog_server='') {
     ensure => present
   }
 
+  apt::ppa{'ppa:stefansundin/truecrypt':} ->
+
+  package{'truecrypt':
+    ensure  => present
+  }
+
   if(!empty($syslog_server)){
     # order matters!
     file_line { 'graylog2-rsyslog-template':
