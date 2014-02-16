@@ -5,6 +5,10 @@ class baseline::filesystem($ssds=[]){
     ensure  => present
   }
 
+  package{'dtrx':
+    ensure  => present
+  }
+
   if(!empty($ssds)){
     file { '/etc/cron.daily/trim':
       ensure  => file,
