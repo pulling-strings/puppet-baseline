@@ -4,7 +4,7 @@ class baseline::security($syslog_server='') {
     ensure => present
   }
 
-  package{['encfs', 'sshfs']:
+  package{'sshfs':
     ensure => present
   }
 

@@ -3,7 +3,7 @@ class baseline::ilarchive {
   include apt::update
   replace { '/etc/apt/sources.list':
     file        => '/etc/apt/sources.list',
-    pattern     => 'be.archive',
+    pattern     => 'us.archive',
     replacement => 'il.archive',
     notify      => Exec['apt_update'],
   }

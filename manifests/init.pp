@@ -1,5 +1,6 @@
 # baseline tools and package for a working secured system.
-class baseline {
+class baseline($home=false) {
+  validate_string($home)
   include security
   include networking
   include filesystem
