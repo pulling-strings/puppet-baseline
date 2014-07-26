@@ -18,4 +18,8 @@ class baseline::filesystem($ssds=[]){
       group   => root,
     }
   }
+
+  package{'btrfs-tools':
+    ensure  => present
+  }
 }
