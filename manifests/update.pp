@@ -23,8 +23,26 @@ class baseline::update($user=false, $keys=[]) {
     group   => $user,
   } ->
 
-  file_line { 'add passwordless update':
-    path => '/etc/sudoers',
-    line => "${user} ALL=NOPASSWD: /usr/bin/apt-get update, /usr/bin/apt-get upgrade -y"
+  file{'/etc/sudoers.d/upgrade':
+    ensure => present
+  } ->
+
+  file_line { 'add passwordless update purge':
+    path => '/etc/sudoers.d/upgrade',
+    line => "${user} ALL=NOPASSWD: /usr/bin/apt-get update, /usr/bin/apt-get upgrade -y, /usr/bin/purge-kernels"
+  }
+
+  file_line { 'remove sudoers file passwordless update':
+    ensure => absent,
+    path   => '/etc/sudoers',
+    line   => "${user} ALL=NOPASSWD: /usr/bin/apt-get update, /usr/bin/apt-get upgrade -y"
+  }
+
+  file { '/usr/bin/purge-kernels':
+    ensure=> file,
+    mode  => '+x',
+    source=> 'puppet:///modules/baseline/purge-kernels',
+    owner => root,
+    group => root,
   }
 }
