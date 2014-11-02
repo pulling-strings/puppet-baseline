@@ -5,9 +5,7 @@ class baseline::networking {
     ensure  => present
   }
 
-  file{"${baseline::home}/.ssh":
-    ensure => directory,
-  }
+  # ensure_resource('file', "${baseline::home}/.ssh", {'ensure' => 'directory'}) 
 
   file{"${baseline::home}/.ssh/config":
     source  => 'puppet:///modules/baseline/ssh_config',

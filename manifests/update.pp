@@ -2,25 +2,13 @@
 class baseline::update($user=false, $keys=[]) {
   validate_string($user)
 
+  baseline::ssh_keys{'upgrade': }
+
   user{$user:
     ensure      => present,
     comment     => 'an upgrade only user',
     managehome  => true,
     home        => "/home/${user}"
-  } ->
-
-  file{"/home/${user}/.ssh/":
-    ensure  => directory,
-    owner   => $user,
-    group   => $user,
-  } ->
-
-  file { "/home/${user}/.ssh/authorized_keys":
-    ensure  => file,
-    mode    => '0644',
-    content => template('baseline/upgrade_keys.erb'),
-    owner   => $user,
-    group   => $user,
   } ->
 
   file{'/etc/sudoers.d/upgrade':
