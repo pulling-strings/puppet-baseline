@@ -8,9 +8,4 @@ class baseline::security {
     ensure => present
   }
 
-  apt::ppa{'ppa:stefansundin/truecrypt':} ->
-
-  package{'truecrypt':
-    ensure  => present
-  }
 }
