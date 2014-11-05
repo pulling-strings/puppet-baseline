@@ -3,7 +3,6 @@
 define baseline::ssh_keys {
 
   $keys = hiera('baseline::ssh_keys')
-  notice(" keys is ${keys} ${name} ${keys[$name]}")
 
   ensure_resource('file', "/home/${name}/.ssh/", {
     ensure => 'directory',
