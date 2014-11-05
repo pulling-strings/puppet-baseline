@@ -1,12 +1,15 @@
 # Setting up authorized_keys for a specific user
-define baseline::ssh_keys(){
+# It requires the user and its home folder creation
+define baseline::ssh_keys {
 
   $keys = hiera('baseline::ssh_keys')
+  notice(" keys is ${keys} ${name} ${keys[$name]}")
 
   ensure_resource('file', "/home/${name}/.ssh/", {
-    'ensure' => 'directory', 
-    'owner'  => $name,
-    'group'  => $name 
+    ensure => 'directory',
+    owner  => $name,
+    group  => $name,
+    require  => [File["/home/${name}"],User[$name]]
   }) 
 
   file { "/home/${name}/.ssh/authorized_keys":

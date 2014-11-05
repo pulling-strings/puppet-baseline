@@ -1,15 +1,19 @@
 # enabling remote apt-get upgrade via a special upgrade only user
-class baseline::update($user=false) {
-  validate_string($user)
+class baseline::update($user='upgrade') {
 
-  baseline::ssh_keys{'upgrade': }
+  baseline::ssh_keys{$user: }
 
-  user{$user:
+  user{ $user:
     ensure      => present,
     comment     => 'an upgrade only user',
-    managehome  => true,
     home        => "/home/${user}"
   } ->
+
+  file{"/home/${user}":
+     ensure => directory,
+     owner  => $user,
+     group  => $user
+  }
 
   file{'/etc/sudoers.d/upgrade':
     ensure => present
