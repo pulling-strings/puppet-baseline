@@ -15,8 +15,8 @@ define baseline::ssh_keys {
     ensure  => file,
     mode    => '0644',
     content => template('baseline/authorized_keys.erb'),
-    owner   => root,
-    group   => root,
+    owner  => $name,
+    group  => $name,
     require => File["/home/${name}/.ssh/"]
   }
 }
