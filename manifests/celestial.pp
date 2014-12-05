@@ -1,5 +1,8 @@
 # Enabling remote Celesital Puppet run
-class baseline::celestial($user='celestial') {
+class baseline::celestial(
+  $user='celestial',
+  $args=''
+) {
 
   baseline::ssh_keys{$user: }
 
@@ -21,7 +24,7 @@ class baseline::celestial($user='celestial') {
 
   file_line { 'Celestial Puppet run':
     path => '/etc/sudoers.d/celestial',
-    line => "${user} ALL=NOPASSWD: /tmp/*/scripts/run.sh --detailed-exitcodes"
+    line => "${user} ALL=NOPASSWD: /tmp/*/scripts/run.sh ${args} --detailed-exitcodes"
   }
 
 }
