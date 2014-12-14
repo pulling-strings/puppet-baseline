@@ -6,6 +6,11 @@ class baseline::celestial(
 
   baseline::ssh_keys{$user: }
 
+  $sudoers= $::osfamily ? {
+    'Debian'   => '/etc/sudoers.d',
+    'FreeBSD'  => '/usr/local/etc/sudoers.d'
+  }
+
   user{ $user:
     ensure  => present,
     comment => 'A Celestial only user',
@@ -18,12 +23,12 @@ class baseline::celestial(
     group  => $user
   }
 
-  file{'/etc/sudoers.d/celestial':
+  file{"${sudoers}/celestial":
     ensure => present
   } ->
 
   file_line { 'Celestial Puppet run':
-    path => '/etc/sudoers.d/celestial',
+    path => "${sudoers}/celestial",
     line => "${user} ALL=NOPASSWD: /tmp/*/scripts/run.sh ${args} --detailed-exitcodes"
   }
 
