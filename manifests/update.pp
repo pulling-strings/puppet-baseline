@@ -1,7 +1,7 @@
 # enabling remote apt-get upgrade via a special upgrade only user
 class baseline::update($user='upgrade') {
 
-  baseline::ssh_keys{$user: }
+  baseline::ssh::keys{$user: }
 
   user{ $user:
     ensure      => present,

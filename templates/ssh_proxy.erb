@@ -1,0 +1,5 @@
+Host <%= @name %>
+  ProxyCommand ssh <%= @proxy %> -W localhost:<%= @port %>
+  User <%= @user %>
+  PasswordAuthentication no
+  IdentityFile <%= @key %>

@@ -4,7 +4,7 @@ class baseline::celestial(
   $args=''
 ) {
 
-  baseline::ssh_keys{$user: }
+  baseline::ssh::keys{$user: }
 
   $sudoers= $::osfamily ? {
     'Debian'   => '/etc/sudoers.d',
