@@ -6,7 +6,7 @@ define baseline::ssh::proxy(
   $key
 ) {
   
-  concat::fragment{ 'proxies':
+  concat::fragment{ "${name}-proxy":
     target  => $baseline::ssh::config::path,
     content => template('baseline/ssh_proxy.erb'),
   }
