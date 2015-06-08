@@ -36,12 +36,12 @@ class baseline::update($user='upgrade') {
 
     file_line { 'add passwordless update purge':
      path    => $sudoer,
-     line    => "${user} ALL=NOPASSWD:  /usr/local/bin/pc-updatemanager *"
+     line    => "${user} ALL=NOPASSWD:  /usr/local/bin/pc-updatemanager *",
      require => File[$sudoer]
     }
   }
 
-  file $sudoer {:
+  file {$sudoer:
     ensure => present
   }
 }
