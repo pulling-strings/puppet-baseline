@@ -21,7 +21,7 @@ class baseline::update($user='upgrade') {
     $update = '/usr/bin/apt-get update'
     $upgrade = '/usr/bin/apt-get upgrade -y'
     $clean = '/usr/bin/apt-get clean'
-    $partial = 'rm -rf /var/lib/apt/lists/partial/*'
+    $partial = '/usr/bin/partial-cleanup'
     $purge = '/usr/bin/purge-kernels'
 
     file_line { 'add passwordless update purge':
@@ -34,6 +34,14 @@ class baseline::update($user='upgrade') {
       ensure => file,
       mode   => '+x',
       source => 'puppet:///modules/baseline/purge-kernels',
+      owner  => root,
+      group  => root,
+    }
+
+    file { '/usr/bin/partial-cleanup':
+      ensure => file,
+      mode   => '+x',
+      source => 'puppet:///modules/baseline/partial-clean',
       owner  => root,
       group  => root,
     }
