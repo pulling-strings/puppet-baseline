@@ -20,14 +20,11 @@ class baseline::update($user='upgrade') {
 
     $update = '/usr/bin/apt-get update'
     $upgrade = '/usr/bin/apt-get upgrade -y'
-    $clean = '/usr/bin/apt-get clean'
-    $partial = '/usr/bin/partial-cleanup'
+    $cleanup = '/usr/bin/apt-cleanup'
     $purge = '/usr/bin/purge-kernels'
 
-    file_line { 'add passwordless update purge':
-      path    => $sudoer,
-      line    => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${clean}, ${partial}, ${purge}",
-      require => File[$sudoer]
+    file { $sudoer:
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade} ${user}, ${purge}, ${cleanup}\n",
     }
 
     file { '/usr/bin/purge-kernels':
@@ -38,24 +35,20 @@ class baseline::update($user='upgrade') {
       group  => root,
     }
 
-    file { '/usr/bin/partial-cleanup':
+    file { '/usr/bin/apt-cleanup':
       ensure => file,
       mode   => '+x',
-      source => 'puppet:///modules/baseline/partial-clean',
+      source => 'puppet:///modules/baseline/apt-cleanup',
       owner  => root,
       group  => root,
     }
   } elsif $::kernel == 'FreeBSD' {
     $sudoer = '/usr/local/etc/sudoers.d/upgrade'
 
-    file_line { 'add passwordless update purge':
-      path    => $sudoer,
-      line    => "${user} ALL=NOPASSWD:  /usr/local/bin/pc-updatemanager *",
-      require => File[$sudoer]
+    file { $sudoer:
+      ensure  => present,
+      content => "${user} ALL=NOPASSWD:  /usr/local/bin/pc-updatemanager *"
     }
   }
 
-  file { $sudoer:
-    ensure => present
-  }
 }
