@@ -24,7 +24,7 @@ class baseline::update($user='upgrade') {
     $purge = '/usr/bin/purge-kernels'
 
     file { $sudoer:
-      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade} ${user}, ${purge}, ${cleanup}\n",
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}\n",
     }
 
     file { '/usr/bin/purge-kernels':
