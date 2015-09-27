@@ -1,6 +1,5 @@
 # Setting up ilarchive
 class baseline::ilarchive {
-  include apt::update
   replace { '/etc/apt/sources.list':
     file        => '/etc/apt/sources.list',
     pattern     => 'us.archive',
@@ -9,5 +8,4 @@ class baseline::ilarchive {
   }
 
   Replace['/etc/apt/sources.list'] -> Package<||>
-  Exec['apt_update']-> Package<||>
 }
