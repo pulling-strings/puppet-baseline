@@ -4,4 +4,10 @@ class baseline($home=false) {
   include ::baseline::security
   include ::baseline::networking
   include ::baseline::filesystem
+
+  if defined('timezone') {
+    package{'debconf-utils':
+      ensure  => present
+    }
+  }
 }
