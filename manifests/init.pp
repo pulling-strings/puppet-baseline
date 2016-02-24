@@ -4,6 +4,4 @@ class baseline($home=false) {
   include ::baseline::security
   include ::baseline::networking
   include ::baseline::filesystem
-
-  package{'mercurial': ensure  => present }
 }
