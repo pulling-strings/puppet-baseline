@@ -29,7 +29,7 @@ class baseline::celestial(
 
   file_line { 'Celestial Puppet run':
     path => "${sudoers}/celestial",
-    line => "${user} ALL=NOPASSWD: /tmp/*/scripts/run.sh ${args} --detailed-exitcodes"
+    line => "${user} ALL=NOPASSWD: /tmp/*/scripts/run.sh ${args} --detailed-exitcodes --color=false"
   }
 
 }
