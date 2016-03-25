@@ -6,8 +6,6 @@ class baseline($home=false) {
   include ::baseline::filesystem
 
   if defined('timezone') {
-    package{'debconf-utils':
-      ensure  => present
-    }
+    ensure_packages(['debconf-utils'],{})
   }
 }
