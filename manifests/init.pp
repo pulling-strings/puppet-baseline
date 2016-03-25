@@ -5,5 +5,9 @@ class baseline($home=false) {
   include ::baseline::networking
   include ::baseline::filesystem
 
-  package{'mercurial': ensure  => present }
+  if defined('timezone') {
+    package{'debconf-utils':
+      ensure  => present
+    }
+  }
 }
