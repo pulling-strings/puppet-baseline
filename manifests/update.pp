@@ -47,7 +47,7 @@ class baseline::update($user='upgrade') {
 
     file { $sudoer:
       ensure  => present,
-      content => "${user} ALL=NOPASSWD:  /usr/local/bin/pc-updatemanager *"
+      content => "${user} ALL=NOPASSWD:/usr/local/bin/pc-updatemanager *\n"
     }
   }
 
