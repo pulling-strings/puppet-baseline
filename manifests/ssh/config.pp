@@ -17,6 +17,8 @@ class baseline::ssh::config($user,$proxies=[]){
   }
 
 
-  create_resources(baseline::ssh::proxy,$proxies)
+  if ($proxies != []){
+    create_resources(baseline::ssh::proxy,$proxies)
+  }
 
 }
