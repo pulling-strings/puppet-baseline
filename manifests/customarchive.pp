@@ -1,9 +1,11 @@
-# Setting up ilarchive
-class baseline::ilarchive {
+# Setting up custom apt archive
+class baseline::customarchive(
+  $new = 'il'
+){
   replace { '/etc/apt/sources.list':
     file        => '/etc/apt/sources.list',
     pattern     => 'us.archive',
-    replacement => 'il.archive',
+    replacement => "${new}.archive",
     notify      => Exec['apt_update'],
   }
 
