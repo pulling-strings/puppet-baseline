@@ -10,27 +10,34 @@ class baseline::mirror(
     ensure_resource('class', '::apt', {purge => {'sources.list' => true}})
 
     apt::source{$::lsbdistcodename:
-      location    => "http://${src}/ubuntu/",
-      release     => $::lsbdistcodename,
-      repos       => 'main restricted universe multiverse',
-      include_src => false,
-      include_deb => true,
+      location => "http://${src}/ubuntu/",
+      release  => $::lsbdistcodename,
+      repos    => 'main restricted universe multiverse',
+      include  => {
+        src => false,
+        deb => true
+      },
     }
 
     apt::source{"${::lsbdistcodename}-updates":
-      location    => "http://${src}/ubuntu/",
-      release     => "${::lsbdistcodename}-updates",
-      repos       => 'main restricted universe multiverse',
-      include_src => false,
-      include_deb => true,
+      location => "http://${src}/ubuntu/",
+      release  => "${::lsbdistcodename}-updates",
+      repos    => 'main restricted universe multiverse',
+      include  => {
+        src => false,
+        deb => true
+      },
     }
 
     apt::source{"${::lsbdistcodename}-backports":
-      location    => "http://${src}/ubuntu/",
-      release     => "${::lsbdistcodename}-backports",
-      repos       => 'main restricted universe multiverse',
-      include_src => false,
-      include_deb => true,
+      location => "http://${src}/ubuntu/",
+      release  => "${::lsbdistcodename}-backports",
+      repos    => 'main restricted universe multiverse',
+      include  => {
+        src => false,
+        deb => true
+      },
+
     }
 
     if $security == 'security.ubuntu.com' {
@@ -40,19 +47,23 @@ class baseline::mirror(
     }
 
     apt::source{"${::lsbdistcodename}-security":
-      location    => "http://${security}/${suffix}/",
-      release     => "${::lsbdistcodename}-security",
-      repos       => 'main restricted universe multiverse',
-      include_src => false,
-      include_deb => true,
+      location => "http://${security}/${suffix}/",
+      release  => "${::lsbdistcodename}-security",
+      repos    => 'main restricted universe multiverse',
+      include  => {
+        src => false,
+        deb => true
+      },
     }
 
     apt::source{"${::lsbdistcodename}-extras":
-      location    => "http://${partner}/ubuntu/",
-      release     => $::lsbdistcodename,
-      repos       => 'partner',
-      include_src => false,
-      include_deb => true,
+      location => "http://${partner}/ubuntu/",
+      release  => $::lsbdistcodename,
+      repos    => 'partner',
+      include  => {
+        src => false,
+        deb => true
+      },
     }
   } else {
     exec{'purge mirror':
