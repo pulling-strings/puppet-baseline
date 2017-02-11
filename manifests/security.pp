@@ -8,4 +8,7 @@ class baseline::security {
     ensure => present
   }
 
+  package{'rng-tools':
+    ensure  => present
+  }
 }
