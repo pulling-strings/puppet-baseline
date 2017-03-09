@@ -5,8 +5,13 @@ class baseline::mirror(
   $partner = 'archive.canonical.com',
   $disable = false
 ) {
-  
+
   if $disable != true {
+    # http://bit.ly/2n9xAod
+    file{'/etc/apt/apt.conf.d/50appstream':
+      ensure => absent
+    } -> Class['apt']
+
     ensure_resource('class', '::apt', {purge => {'sources.list' => true}})
 
     apt::source{$::lsbdistcodename:
@@ -65,6 +70,8 @@ class baseline::mirror(
         deb => true
       },
     }
+
+
   } else {
     exec{'purge mirror':
       command => "rm -f /etc/apt/sources.list.d/${$::lsbdistcodename}*",
