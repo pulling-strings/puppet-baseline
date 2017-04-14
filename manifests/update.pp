@@ -18,13 +18,14 @@ class baseline::update($user='upgrade') {
   if $::kernel == 'Linux' {
     $sudoer = '/etc/sudoers.d/upgrade'
 
-    $update = '/usr/bin/apt-get update'
-    $upgrade = '/usr/bin/apt-get upgrade -y'
+    $update = '/usr/bin/apt update'
+    $upgrade = '/usr/bin/apt upgrade -y'
     $cleanup = '/usr/bin/apt-cleanup'
     $purge = '/usr/bin/purge-kernels'
+    $install = '/usr/bin/apt install * -y'
 
     file { $sudoer:
-      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}\n",
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}\n",
     }
 
     file { '/usr/bin/purge-kernels':
