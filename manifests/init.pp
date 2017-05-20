@@ -4,6 +4,7 @@ class baseline($home=false) {
   include ::baseline::security
   include ::baseline::networking
   include ::baseline::filesystem
+  include ::baseline::services
 
   if defined('timezone') {
     ensure_packages(['debconf-utils'],{})
