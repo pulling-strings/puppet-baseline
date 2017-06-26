@@ -23,6 +23,7 @@ class baseline::update($user='upgrade') {
     $cleanup = '/usr/bin/apt-cleanup'
     $purge = '/usr/bin/purge-kernels'
     $install = '/usr/bin/apt install * -y'
+    $puppet = '/bin/bash run.sh *'
 
     file { $sudoer:
       content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}\n",
