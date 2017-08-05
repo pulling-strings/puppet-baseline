@@ -23,10 +23,10 @@ class baseline::update($user='upgrade') {
     $cleanup = '/usr/bin/apt-cleanup'
     $purge = '/usr/bin/purge-kernels'
     $install = '/usr/bin/apt install * -y'
-    $puppet = '/bin/bash run.sh *'
+    $puppet = '/bin/bash run.sh --detailed-exitcodes --color=false'
 
     file { $sudoer:
-      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}\n",
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}, ${puppet}\n",
     }
 
     file { '/usr/bin/purge-kernels':
