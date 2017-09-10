@@ -11,4 +11,9 @@ class baseline::security {
   package{'rng-tools':
     ensure  => present
   }
+
+  package{'veracrypt':
+    ensure  => present,
+    require => [Apt::Source['barbecue'], Class['apt::update']]
+  }
 }
