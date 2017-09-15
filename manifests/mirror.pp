@@ -7,6 +7,8 @@ class baseline::mirror(
 ) {
 
   if $disable != true {
+    include baseline::mirror::manage
+
     # http://bit.ly/2n9xAod
     file{'/etc/apt/apt.conf.d/50appstream':
       ensure => absent

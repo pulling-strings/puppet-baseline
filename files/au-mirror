@@ -1,0 +1,4 @@
+rm /etc/apt/sources.list.d || true
+rm /etc/apt/sources.list || true
+ln -s /etc/apt/sources.list.d_au /etc/apt/sources.list.d
+ln -s /etc/apt/sources.list_au /etc/apt/sources.list

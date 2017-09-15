@@ -1,0 +1,4 @@
+rm sources.list.d
+rm sources.list
+ln -s /etc/apt/sources.list.d_mirror /etc/apt/sources.list.d
+ln -s /etc/apt/sources.list_mirror /etc/apt/sources.list
