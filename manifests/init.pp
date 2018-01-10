@@ -1,7 +1,6 @@
 # baseline tools and package for a working secured system.
 class baseline($home=false) {
   validate_string($home)
-  include ::baseline::security
   include ::baseline::networking
   include ::baseline::filesystem
   include ::baseline::services
