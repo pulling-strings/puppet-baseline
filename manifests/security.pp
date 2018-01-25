@@ -16,4 +16,8 @@ class baseline::security {
     ensure  => present,
     require => [Apt::Source['barbecue'], Class['apt::update']]
   }
+
+  package{'pass':
+    ensure  => present
+  }
 }
