@@ -18,15 +18,16 @@ class baseline::update($user='upgrade') {
   if $::kernel == 'Linux' {
     $sudoer = '/etc/sudoers.d/upgrade'
 
-    $update = '/usr/bin/apt update'
+    $update  = '/usr/bin/apt update'
     $upgrade = '/usr/bin/apt upgrade -y'
     $cleanup = '/usr/bin/apt-cleanup'
-    $purge = '/usr/bin/purge-kernels'
+    $purge   = '/usr/bin/purge-kernels'
     $install = '/usr/bin/apt install * -y'
-    $puppet = '/bin/bash run.sh --detailed-exitcodes --color=false'
+    $ufw     = '/usr/sbin/ufw status'
+    $puppet  = '/bin/bash run.sh --detailed-exitcodes --color=false'
 
     file { $sudoer:
-      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}, ${puppet}\n",
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}, ${ufw}, ${puppet}\n",
     }
 
     file { '/usr/bin/purge-kernels':
