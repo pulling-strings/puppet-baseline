@@ -1,10 +1,12 @@
 # Mirror switch management
-class baseline::mirror::manage {
+class baseline::mirror::manage(
+  $region = 'au'
+){
     file{"${::baseline::home}/bin/":
       ensure => directory,
-    } ->
+    }
 
-    file { "${::baseline::home}/bin/au-mirror":
+    -> file { "${::baseline::home}/bin/au-mirror":
       ensure  => file,
       mode    => 'u+x',
       source  => 'puppet:///modules/baseline/au-mirror',
@@ -22,7 +24,7 @@ class baseline::mirror::manage {
       require => File["${::baseline::home}/bin/"]
     }
 
-    file { '/etc/apt/source.list_au':
+    file { '/etc/apt/sources.list_au':
       ensure  => file,
       mode    => 'u+x',
       content => template('baseline/sources.list.erb'),
