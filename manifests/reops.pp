@@ -1,22 +1,22 @@
 # enabling remote apt-get upgrade via a special upgrade only user
-class baseline::update($user='upgrade') {
+class baseline::reops($user='re-ops') {
 
   baseline::ssh::keys{$user: }
 
   user{ $user:
     ensure  => present,
-    comment => 'an upgrade only user',
+    comment => 'an re-ops only user',
     home    => "/home/${user}"
-  } ->
+  }
 
-  file{"/home/${user}":
+  -> file{"/home/${user}":
     ensure => directory,
     owner  => $user,
     group  => $user
   }
 
   if $::kernel == 'Linux' {
-    $sudoer = '/etc/sudoers.d/upgrade'
+    $sudoer = '/etc/sudoers.d/re-ops'
 
     $update  = '/usr/bin/apt update'
     $upgrade = '/usr/bin/apt upgrade -y'
@@ -46,7 +46,7 @@ class baseline::update($user='upgrade') {
       group  => root,
     }
   } elsif $::kernel == 'FreeBSD' {
-    $sudoer = '/usr/local/etc/sudoers.d/upgrade'
+    $sudoer = '/usr/local/etc/sudoers.d/re-ops'
 
     file { $sudoer:
       ensure  => present,
