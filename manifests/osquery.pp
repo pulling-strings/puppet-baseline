@@ -16,6 +16,7 @@ class baseline::osquery {
     }
 
     -> package{'osquery':
-      ensure  => present
+      ensure  => present,
+      require => Class['apt::update']
     }
 }
