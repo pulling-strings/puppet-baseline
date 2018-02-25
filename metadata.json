@@ -1,0 +1,27 @@
+{
+  "name": "puppet-basline",
+  "version": "0.2.0",
+  "author": "Ronen Narkis",
+  "summary": "Base settings that range from ssh to repo mirroring and security settings",
+  "license": "Apache-2.0",
+  "source": "https://github.com/pulling-strings/puppet-baseline",
+  "project_page": "https://github.com/pulling-strings/puppet-baseline",
+  "issues_url": "https://github.com/pulling-strings/puppet-baseline",
+  "dependencies": [
+  ],
+  "data_provider": null,
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9.0"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.0.0"
+    }
+  ]
+}
