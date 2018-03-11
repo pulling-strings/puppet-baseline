@@ -1,5 +1,5 @@
 # ulimits
-class basline::limit {
+class baseline::limit {
   # Dockerized Elasticsearch
   file_line { 'max-map-count':
     path => '/etc/sysctl.conf',

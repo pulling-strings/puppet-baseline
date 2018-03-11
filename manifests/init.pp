@@ -5,7 +5,7 @@ class baseline(
   include ::baseline::networking
   include ::baseline::filesystem
   include ::baseline::services
-  include ::baseline::ulimits
+  include ::baseline::limit
 
   if defined('timezone') {
     ensure_packages(['debconf-utils'],{})
