@@ -1,1 +1,3 @@
-<%=@keys[@name].join('\n')%>
+<% for key in @keys[@name] -%>
+<%= key %>
+<% end -%>
