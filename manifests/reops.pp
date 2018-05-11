@@ -24,10 +24,11 @@ class baseline::reops($user='re-ops') {
     $purge   = '/usr/bin/purge-kernels'
     $install = '/usr/bin/apt install * -y'
     $ufw     = '/usr/sbin/ufw status'
-    $puppet  = '/bin/bash run.sh --detailed-exitcodes --color=false'
+    $puppet_code  = '/bin/bash run.sh --detailed-exitcodes --color=false'
+    $puppet_args  = '/bin/bash run.sh --hiera_config * manifests/* '
 
     file { $sudoer:
-      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}, ${ufw}, ${puppet}\n",
+      content => "${user} ALL=NOPASSWD: ${update}, ${upgrade}, ${purge}, ${cleanup}, ${install}, ${ufw}, ${puppet_code}, ${puppet_args}\n",
     }
 
     file { '/usr/bin/purge-kernels':
